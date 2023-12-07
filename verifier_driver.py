@@ -5,8 +5,10 @@ from flask import Flask, request
 from PIL import Image
 import json
 
+embedding_model = EmbeddingModel()
+
 def get_embedding(face_frame):
-    embedding_model = EmbeddingModel()
+    
     embedding = embedding_model.load_face(face_frame).preprocess().predict().postprocess() 
     return embedding
 
@@ -30,7 +32,7 @@ def upload():
     return {"embedding": embedding.tolist()}
 
 if __name__ == '__main__':
-    app.run(debug=True, port=4001)
+    app.run(debug=True, port=4001, host="0.0.0.0")
 
 # if __name__ == "__main__":
 #     x0, y0, x1, y1 = map(int, [p1[0], p1[1], p2[0], p2[1]])
