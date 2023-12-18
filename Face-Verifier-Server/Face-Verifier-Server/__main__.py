@@ -18,5 +18,5 @@ args, _ = parser.parse_known_args()
 
 if __name__ == "__main__":
     driver = EmbeddingModel(args.model_name, args.model_dir)
-    kfserver = kserve.ModelServer()
+    kfserver = kserve.ModelServer(http_port=4001)
     kfserver.start(models=[driver])
