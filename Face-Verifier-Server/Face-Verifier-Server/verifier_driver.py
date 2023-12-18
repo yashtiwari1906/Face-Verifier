@@ -28,7 +28,6 @@ class EmbeddingModel(kserve.Model):
         self.name = name
         self.model_dir = model_dir
         self.load() 
-        # self.face_frame = None 
 
     def download_weights(self):
         print("downloading weights....")
@@ -44,10 +43,6 @@ class EmbeddingModel(kserve.Model):
         self.vanilla_embedding_model = InceptionResNetV1(weights_path='verifier_weights/facenet_keras_weights_VGGFace2.h5', classes=512)
         self.embedding_model = keras.models.Model(self.vanilla_embedding_model.inputs, self.vanilla_embedding_model.layers[-1].output)
         self.ready = True 
-    
-    # def load_face(self, face_frame):
-    #     self.face_frame = face_frame 
-    #     return self 
 
     def preprocess(self, payload, headers):
         image_list = get_predict_input(payload)
